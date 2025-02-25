@@ -10,7 +10,7 @@ export class RandomUserService {
 
   find() {
     return this._http
-      .get('https://randomuser.me/api/', {
+      .get('https://randomuser.me/api/?results=5', {
         headers: {
           noauth: 'true', // Ad noauth header to bypass custom api prefix interceptor
         },

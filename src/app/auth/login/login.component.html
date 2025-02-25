@@ -3,11 +3,11 @@
     <h2 translate>Login</h2>
     <form>
       <div class="input-field">
-        <input required type="text" />
-        <label translate>Username</label>
+        <input required type="text" name="email" [(ngModel)]="email" />
+        <label translate>Email</label>
       </div>
       <div class="input-field">
-        <input required type="password" />
+        <input required type="password" name="password" [(ngModel)]="password" />
         <label translate>Password</label>
       </div>
       <button (click)="login()" type="submit">{{ 'Login' | translate }}</button>

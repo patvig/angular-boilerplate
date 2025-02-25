@@ -14,6 +14,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent {
   version: string | null = environment.version;
+  email: string = '';
+  password: string = '';
 
   constructor(
     private readonly _router: Router,
@@ -22,19 +24,20 @@ export class LoginComponent {
   ) {}
 
   login() {
-    // Here You can call the login method from the AuthenticationService directly and pass the required parameters.
-    // setting credentials and other logic will be handled in the AuthenticationService.
+    //console.log("this.email", this.email);
+    //console.log("this.password", this.password);
+
     this._authService
       .login({
-        username: 'johndoe',
-        password: '123456',
+        email: this.email,
+        password: this.password,
       })
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (res) => {
           // Navigate to the home page or any other page after successful login.
           if (res) {
-            console.log('Login successful');
+            console.log('Login successful', res);
             this._router.navigate([this._route.snapshot.queryParams['redirect'] || '/dashboard'], { replaceUrl: true }).then(() => {
               // Handle the navigation
               console.log('Navigated to dashboard');

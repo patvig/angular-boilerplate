@@ -13,6 +13,10 @@ export class UseRandomUser {
   private readonly _randomUserService: RandomUserService = inject(RandomUserService);
 
   getAllUsers() {
-    return this._randomUserService.find().pipe(map((response) => response.map((user: any) => plainToInstance(RandomUserEntity, user))));
+    let liste = this._randomUserService.find();
+    console.log('liste', liste);
+    let retour = liste.pipe(map((response) => response.map((user: any) => plainToInstance(RandomUserEntity, user))));
+    console.log('retour', retour);
+    return retour;
   }
 }

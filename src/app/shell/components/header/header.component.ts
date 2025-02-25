@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { AuthenticationService, CredentialsService } from '@auth';
 
 @UntilDestroy()
 @Component({
@@ -9,5 +10,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   standalone: false,
 })
 export class HeaderComponent {
-  menuHidden = true;
+  menuHidden = false;
+  currentUser = this.authService.currentUser;
+  constructor(private authService: AuthenticationService) {}
 }

@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import { CredentialsService } from '@app/auth';
 import { Credentials } from '@core/entities';
+import { map } from 'rxjs/operators';
 
 export interface LoginContext {
-  username: string;
+  email: string;
   password: string;
   remember?: boolean;
   isMobile?: boolean;
@@ -19,28 +21,42 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private readonly _credentialsService: CredentialsService) {}
+  private apiUrl = 'http://api2-patrice:8000/api';
+  public currentUser = signal<any | null>(this.getStoredUser());
+
+  constructor(
+    private readonly _credentialsService: CredentialsService,
+    private http: HttpClient,
+  ) {}
+
+  private getStoredUser(): any | null {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  }
 
   /**
    * Authenticates the user.
    * @param context The login parameters.
    * @return The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    const credentials: Credentials = new Credentials({
-      username: 'johndoe',
-      id: '',
-      token: '123456',
-      refreshToken: '123456',
-      expiresIn: 3600,
-      roles: ['admin'],
-      email: 'john@email.com',
-      firstName: 'John',
-      lastName: 'Doe',
-    });
-    this._credentialsService.setCredentials(credentials, context.remember);
-
-    return of(credentials);
+  login(context: LoginContext) {
+    return this.http.post<any>(`${this.apiUrl}/login_check`, context).pipe(
+      map((user) => {
+        if (user?.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUser.set(user);
+          const credentials: Credentials = new Credentials({
+            token: user.token,
+            refreshToken: user.refresh_token,
+            expiresIn: 3600,
+            email: context.email,
+            roles: user.user.roles,
+          });
+          this._credentialsService.setCredentials(credentials, context.remember);
+        }
+        return user;
+      }),
+    );
   }
 
   /**

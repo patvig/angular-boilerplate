@@ -1,0 +1,24 @@
+<section class="main-container">
+  <h2>Mon profil</h2>
+
+  <div class="user-table-container">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Roles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ currentUser.user.id }}</td>
+          <td>{{ currentUser.user.nom }}</td>
+          <td>{{ currentUser.user.email }}</td>
+          <td>{{ currentUser.user.roles }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

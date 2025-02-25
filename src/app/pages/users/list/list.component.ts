@@ -20,6 +20,7 @@ export class ListComponent implements OnInit {
     this._useRandomUser.getAllUsers().subscribe({
       next: (users) => {
         this.users = users;
+        console.log('users', users);
         this.isLoading = false;
       },
       error: (error) => {
