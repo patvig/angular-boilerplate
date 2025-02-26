@@ -2,7 +2,6 @@ import { Component, effect, Signal, signal } from '@angular/core';
 import { LoaderService } from '../../../@core/services/loader/loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
-import { count } from 'console';
 
 @Component({
   selector: 'app-loader',

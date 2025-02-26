@@ -50,7 +50,6 @@ export class AuthenticationService {
     return this.http.post<any>(`${this.apiUrl}/login_check`, context).pipe(
       map((user) => {
         if (user?.token) {
-          console.log('user', user);
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUser.set(user);
           const credentials: Credentials = new Credentials({
