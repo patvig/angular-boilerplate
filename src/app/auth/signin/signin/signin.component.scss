@@ -1,4 +1,4 @@
-.login {
+.signin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,8 +10,7 @@
   flex-direction: column;
 }
 
-.signin-box,
-.login-box {
+.signin-box {
   width: 300px;
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -64,12 +63,12 @@
     border-radius: 4px;
     font-size: 16px;
     color: #fff;
-    background-color: #333;
+    background-color: #241b44;
     cursor: pointer;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #555;
+      background-color: #33294d;
     }
   }
 }

@@ -12,6 +12,13 @@ export interface LoginContext {
   remember?: boolean;
   isMobile?: boolean;
 }
+export interface RegisterContext {
+  nom: string;
+  email: string;
+  password: string;
+  remember?: boolean;
+  isMobile?: boolean;
+}
 
 /**
  * Provides a base for authentication workflow.
@@ -43,6 +50,7 @@ export class AuthenticationService {
     return this.http.post<any>(`${this.apiUrl}/login_check`, context).pipe(
       map((user) => {
         if (user?.token) {
+          console.log('user', user);
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUser.set(user);
           const credentials: Credentials = new Credentials({
@@ -50,11 +58,41 @@ export class AuthenticationService {
             refreshToken: user.refresh_token,
             expiresIn: 3600,
             email: context.email,
-            roles: user.user.roles,
+            roles: user.roles,
           });
           this._credentialsService.setCredentials(credentials, context.remember);
+          return of(credentials);
         }
-        return user;
+
+        return false;
+      }),
+    );
+  }
+
+  /**
+   * Register the user.
+   * @param context The login parameters.
+   * @return The user credentials.
+   */
+  register(context: RegisterContext) {
+    return this.http.post<any>(`${this.apiUrl}/register`, context).pipe(
+      map((user) => {
+        if (user?.token) {
+          console.log('user', user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUser.set(user);
+          const credentials: Credentials = new Credentials({
+            token: user.token,
+            refreshToken: user.refresh_token,
+            expiresIn: 3600,
+            email: context.email,
+            roles: user.roles,
+          });
+          this._credentialsService.setCredentials(credentials, context.remember);
+          return of(credentials);
+        }
+
+        return false;
       }),
     );
   }

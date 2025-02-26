@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { environment } from '@env/environment';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -16,17 +16,21 @@ export class LoginComponent {
   version: string | null = environment.version;
   email: string = '';
   password: string = '';
+  isPageReady = signal(false);
 
   constructor(
     private readonly _router: Router,
     private readonly _route: ActivatedRoute,
     private readonly _authService: AuthenticationService,
-  ) {}
-
+  ) {
+    window.addEventListener('load', () => {
+      this.isPageReady.set(true);
+    });
+  }
+  signin() {
+    this._router.navigate([this._route.snapshot.queryParams['redirect'] || '/signin'], { replaceUrl: true }).then(() => {});
+  }
   login() {
-    //console.log("this.email", this.email);
-    //console.log("this.password", this.password);
-
     this._authService
       .login({
         email: this.email,
