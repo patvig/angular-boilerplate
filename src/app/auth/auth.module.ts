@@ -7,9 +7,10 @@ import { LoginComponent } from '@app/auth/login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LanguageSelectorComponent } from '@app/i18n';
 import { SigninComponent } from './signin/signin/signin.component';
+import { LoaderComponent } from '../shell/components/loader/loader.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, AuthRouting, FormsModule, LanguageSelectorComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, AuthRouting, FormsModule, LanguageSelectorComponent, LoaderComponent],
   declarations: [LoginComponent, LogoutComponent, SigninComponent],
 })
 export class AuthModule {}

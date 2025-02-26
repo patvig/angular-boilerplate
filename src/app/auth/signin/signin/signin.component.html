@@ -1,3 +1,5 @@
+<app-loader></app-loader>
+
 <div class="signin">
   <div class="signin-box">
     <h2 translate>Sign in</h2>
@@ -29,7 +31,7 @@
         <p *ngIf="signInForm.hasError('passwordsMismatch') && isSubmitted()">Les mots de passe ne correspondent pas.</p>
       </div>
 
-      <button type="submit">Créer un compte</button>
+      <button type="submit">Valider</button>
     </form>
 
     <p>Force du mot de passe : {{ getPasswordStrength() }}</p>
