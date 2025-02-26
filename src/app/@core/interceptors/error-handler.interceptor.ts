@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger } from '../services/misc';
+import { HotToastService } from '@ngneat/hot-toast';
 
 const log = new Logger('ErrorHandlerInterceptor');
 
@@ -15,16 +16,39 @@ const log = new Logger('ErrorHandlerInterceptor');
   providedIn: 'root',
 })
 export class ErrorHandlerInterceptor implements HttpInterceptor {
+  private readonly _toast = inject(HotToastService);
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError((error) => this._errorHandler(error)));
   }
 
-  //TODO: Customize the default error handler here if needed
-  private _errorHandler(response: HttpEvent<any>): Observable<HttpEvent<any>> {
+  private _errorHandler(error: HttpEvent<any>): Observable<HttpEvent<any>> {
     if (!environment.production) {
-      // Do something with the error
-      log.error('Request error', response);
+      log.error('Request error', error);
     }
-    throw response;
+
+    if (error instanceof HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        console.error('Error Event');
+      } else {
+        this._toast.error(`error status : ${error.status} ${error.statusText}`, {
+          theme: 'snackbar',
+          icon: '⚠️',
+          position: 'bottom-center',
+        });
+        switch (error.status) {
+          case 401: //login
+            //this.router.navigateByUrl("/login");
+            break;
+          case 403: //forbidden
+            //this.router.navigateByUrl("/unauthorized");
+            break;
+        }
+      }
+    } else {
+      //some thing else happened
+    }
+
+    throw error;
   }
 }
