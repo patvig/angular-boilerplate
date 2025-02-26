@@ -6,11 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '@env/environment';
 import { ShellModule } from './shell/shell.module';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApiPrefixInterceptor, ErrorHandlerInterceptor } from '@core/interceptors';
+import { ApiPrefixInterceptor, ErrorHandlerInterceptor, LoaderInterceptor } from '@core/interceptors';
 import { RouteReusableStrategy } from '@core/helpers';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
 import { SocketIoModule } from '@core/socket-io';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 if (environment.production) {
   enableProdMode();
@@ -67,6 +68,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: ApiPrefixInterceptor,
       multi: true,
     },
@@ -79,5 +85,6 @@ export const appConfig: ApplicationConfig = {
       provide: RouteReuseStrategy,
       useClass: RouteReusableStrategy,
     },
+    provideAnimationsAsync(),
   ],
 };
