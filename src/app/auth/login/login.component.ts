@@ -16,17 +16,12 @@ export class LoginComponent {
   version: string | null = environment.version;
   email: string = '';
   password: string = '';
-  isPageReady = signal(false);
 
   constructor(
     private readonly _router: Router,
     private readonly _route: ActivatedRoute,
     private readonly _authService: AuthenticationService,
-  ) {
-    window.addEventListener('load', () => {
-      this.isPageReady.set(true);
-    });
-  }
+  ) {}
   signin() {
     this._router.navigate([this._route.snapshot.queryParams['redirect'] || '/signin'], { replaceUrl: true }).then(() => {});
   }
@@ -52,5 +47,9 @@ export class LoginComponent {
           // Handle the error here
         },
       });
+  }
+  forgotpw(event) {
+    event.preventDefault();
+    this._router.navigate(['/resetpassword']);
   }
 }

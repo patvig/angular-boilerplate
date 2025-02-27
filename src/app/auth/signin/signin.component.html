@@ -36,4 +36,8 @@
 
     <p>Force du mot de passe : {{ getPasswordStrength() }}</p>
   </div>
+
+  <div class="signin-box">
+    <a (click)="login($event)" href="#">{{ 'Retour à la page de connection' | translate }}</a>
+  </div>
 </div>

@@ -1,21 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AuthenticationService } from '@app/auth';
 import { RegisterContext } from '@app/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-signin',
   standalone: false,
-
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent {
   signInForm: FormGroup;
   isSubmitted = signal(false); // Signal pour l'état du formulaire
+  private readonly _toast = inject(HotToastService);
 
   constructor(
     private fb: FormBuilder,
@@ -47,25 +47,38 @@ export class SigninComponent {
 
   // Soumission du formulaire
   onSubmit() {
-    this.isSubmitted.set(true);
     if (this.signInForm.valid) {
-      console.log('Formulaire soumis :', this.signInForm.value);
-    }
+      this._authService
+        .register(this.getRegisterContext())
+        .pipe(untilDestroyed(this))
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this._toast
+                .show('Creation de compte réussi, redirection vers la page de connection...', {
+                  theme: 'snackbar',
+                  icon: '✅',
+                  position: 'bottom-center',
+                  duration: 2000,
+                })
+                .afterClosed.subscribe(() => {
+                  this._router.navigate(['/login']);
+                });
+            } else {
+              this._toast.error('Echec de creation de compte', {
+                theme: 'snackbar',
+                icon: '⚠️',
+                position: 'bottom-center',
+              });
+            }
+          },
+          error: (error) => {
+            // Handle the error here
+          },
+        });
 
-    this._authService
-      .register(this.getRegisterContext())
-      .pipe(untilDestroyed(this))
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            console.log('Register successful', res);
-            this._router.navigate([this._route.snapshot.queryParams['redirect'] || '/login'], { replaceUrl: true }).then(() => {});
-          }
-        },
-        error: (error) => {
-          // Handle the error here
-        },
-      });
+      this.isSubmitted.set(true);
+    }
   }
 
   getPasswordStrength(): string {
@@ -81,5 +94,10 @@ export class SigninComponent {
       email: this.signInForm.value.email,
       password: this.signInForm.value.password,
     };
+  }
+
+  login(event) {
+    event.preventDefault();
+    this._router.navigate(['/login']);
   }
 }

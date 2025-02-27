@@ -1,6 +1,6 @@
 <app-loader></app-loader>
 
-<div class="login" *ngIf="isPageReady()">
+<div class="login">
   <div class="login-box">
     <h2 translate>Login</h2>
     <form>
@@ -13,6 +13,7 @@
         <label translate>Password</label>
       </div>
       <button (click)="login()" type="submit">{{ 'Login' | translate }}</button>
+      <a (click)="forgotpw($event)" href="#">{{ 'Forgot password?' | translate }}</a>
     </form>
   </div>
   <div class="signin-box">

@@ -12,6 +12,9 @@ export interface LoginContext {
   remember?: boolean;
   isMobile?: boolean;
 }
+export interface ResetPasswordContext {
+  email: string;
+}
 export interface RegisterContext {
   nom: string;
   email: string;
@@ -68,6 +71,14 @@ export class AuthenticationService {
     );
   }
 
+  resetPassword(context: ResetPasswordContext) {
+    return this.http.post<any>(`${this.apiUrl}/resetpassword`, context).pipe(
+      map((reponse) => {
+        return reponse;
+      }),
+    );
+  }
+
   /**
    * Register the user.
    * @param context The login parameters.
@@ -75,23 +86,8 @@ export class AuthenticationService {
    */
   register(context: RegisterContext) {
     return this.http.post<any>(`${this.apiUrl}/register`, context).pipe(
-      map((user) => {
-        if (user?.token) {
-          console.log('user', user);
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUser.set(user);
-          const credentials: Credentials = new Credentials({
-            token: user.token,
-            refreshToken: user.refresh_token,
-            expiresIn: 3600,
-            email: context.email,
-            roles: user.roles,
-          });
-          this._credentialsService.setCredentials(credentials, context.remember);
-          return of(credentials);
-        }
-
-        return false;
+      map((reponse) => {
+        return reponse.message;
       }),
     );
   }

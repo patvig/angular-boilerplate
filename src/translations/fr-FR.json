@@ -1,13 +1,15 @@
 {
-  "APP_NAME": "Angular v18 Boiler Plate",
+  "APP_NAME": "Angular 19 Boiler Plate",
   "LANGUAGE": "Français",
   "Hello World": "Bonjour le monde",
   "Home": "Maison",
   "Login": "S'identifier",
+  "Forgot password?": "Mot de passe oublié",
+  "Reset password": "Changement de mot de passe",
   "Sign in": "Créer un compte",
   "Submit": "Envoyer",
   "Username": "Nom d'utilisateur",
   "Password": "Mot de passe",
-  "Angular Boiler Plate V18": "Plaque de chaudière angulaire V18",
+  "test Angular 19": "Angular 19",
   "Dashboard": "Tableau de bord"
 }

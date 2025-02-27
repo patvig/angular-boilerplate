@@ -4,7 +4,8 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { LoginComponent } from '@app/auth/login/login.component';
 import { AlreadyLoggedCheckGuard } from '@app/auth/guard/authentication.guard';
 import { LogoutComponent } from '@app/auth/logout/logout.component';
-import { SigninComponent } from './signin/signin/signin.component';
+import { SigninComponent } from './signin/signin.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,7 +16,13 @@ const routes: Routes = [
     data: { title: marker('Login') },
   },
   {
+    path: 'resetpassword',
+    component: ResetpasswordComponent,
+    data: { title: marker('Reset password') },
+  },
+  {
     path: 'signin',
+    canActivate: [AlreadyLoggedCheckGuard],
     component: SigninComponent,
     data: { title: marker('Sign in') },
   },

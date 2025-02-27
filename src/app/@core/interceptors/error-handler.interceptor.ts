@@ -40,7 +40,9 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             //this.router.navigateByUrl("/unauthorized");
             break;
           default:
-            this._toast.error(`error status : ${error.status} ${error.statusText}`, {
+            let message = error.error.message ? error.error.message : `${error.status} ${error.statusText}`;
+
+            this._toast.error(`${message}`, {
               theme: 'snackbar',
               icon: '⚠️',
               position: 'bottom-center',

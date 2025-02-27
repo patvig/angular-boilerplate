@@ -1,6 +1,8 @@
 export * from './auth.module';
 export * from './auth.routing';
 export * from './login/login.component';
+export * from './signin/signin.component';
+export * from './resetpassword/resetpassword.component';
 export * from './guard/authentication.guard';
 
 // Services
