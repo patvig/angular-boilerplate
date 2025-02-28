@@ -8,10 +8,11 @@ import { AuthRouting } from '@app/auth/auth.routing';
 import { LoginComponent } from '@app/auth/login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SigninComponent } from './signin/signin.component';
+import { ResetpasswordRequestComponent } from './resetpasswordRequest/resetpasswordRequest.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, AuthRouting, FormsModule, LanguageSelectorComponent, LoaderComponent],
-  declarations: [LoginComponent, LogoutComponent, SigninComponent, ResetpasswordComponent],
+  declarations: [LoginComponent, LogoutComponent, SigninComponent, ResetpasswordRequestComponent, ResetpasswordComponent],
 })
 export class AuthModule {}

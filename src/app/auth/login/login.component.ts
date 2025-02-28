@@ -50,6 +50,6 @@ export class LoginComponent {
   }
   forgotpw(event) {
     event.preventDefault();
-    this._router.navigate(['/resetpassword']);
+    this._router.navigate(['/resetpasswordRequest']);
   }
 }

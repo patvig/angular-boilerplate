@@ -5,10 +5,16 @@ import { LoginComponent } from '@app/auth/login/login.component';
 import { AlreadyLoggedCheckGuard } from '@app/auth/guard/authentication.guard';
 import { LogoutComponent } from '@app/auth/logout/logout.component';
 import { SigninComponent } from './signin/signin.component';
+import { ResetpasswordRequestComponent } from './resetpasswordRequest/resetpasswordRequest.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'resetpassword/:token/:email',
+    canActivate: [AlreadyLoggedCheckGuard],
+    component: ResetpasswordComponent,
+    data: { title: marker('Reset password') },
+  },
   {
     path: 'login',
     canActivate: [AlreadyLoggedCheckGuard],
@@ -16,9 +22,10 @@ const routes: Routes = [
     data: { title: marker('Login') },
   },
   {
-    path: 'resetpassword',
-    component: ResetpasswordComponent,
-    data: { title: marker('Reset password') },
+    path: 'resetpasswordRequest',
+    canActivate: [AlreadyLoggedCheckGuard],
+    component: ResetpasswordRequestComponent,
+    data: { title: marker('Reset password Request') },
   },
   {
     path: 'signin',
@@ -31,6 +38,7 @@ const routes: Routes = [
     component: LogoutComponent,
     data: { title: marker('Logout') },
   },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

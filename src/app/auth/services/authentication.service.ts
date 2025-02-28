@@ -12,7 +12,12 @@ export interface LoginContext {
   remember?: boolean;
   isMobile?: boolean;
 }
+export interface ResetPasswordRequestContext {
+  email: string;
+}
 export interface ResetPasswordContext {
+  password: string;
+  token: string;
   email: string;
 }
 export interface RegisterContext {
@@ -67,6 +72,14 @@ export class AuthenticationService {
         }
 
         return false;
+      }),
+    );
+  }
+
+  resetPasswordRequest(context: ResetPasswordRequestContext) {
+    return this.http.post<any>(`${this.apiUrl}/requestResetPassword`, context).pipe(
+      map((reponse) => {
+        return reponse;
       }),
     );
   }
