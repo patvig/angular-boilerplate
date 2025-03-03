@@ -30,7 +30,7 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
       if (!(request.body instanceof FormData)) {
         headers = headers.set('content-type', 'application/json');
       }
-      headers = headers.set('Authorization', `Bearer ${token}`);
+      headers = headers.set('Authorization', `${token}`);
     }
     headers = headers.set('Accept-Language', currentLang).set('Content-Language', currentLang).set('lang', currentLang);
 
