@@ -1,0 +1,14 @@
+<div *ngIf="isLoading" class="loading">Chargement des produits...</div>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<div class="component-box">
+  <ul *ngIf="!isLoading && !errorMessage">
+    <li *ngFor="let product of products">
+      <h3>{{ product.name }}</h3>
+      <p>Prix : {{ product.price }} €</p>
+      <p>{{ product.description }}</p>
+      <a [routerLink]="['/product', product.id]">Voir Détails</a>
+    </li>
+  </ul>
+</div>

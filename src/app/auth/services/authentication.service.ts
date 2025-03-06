@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { CredentialsService } from '@app/auth';
 import { Credentials } from '@core/entities';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 export interface LoginContext {
   email: string;
@@ -36,7 +37,7 @@ export interface RegisterContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://api2-patrice:8000/api';
+  private apiUrl = environment.apiUrl;
   public currentUser = signal<any | null>(this.getStoredUser());
 
   constructor(

@@ -47,6 +47,8 @@ export class SigninComponent {
 
   // Soumission du formulaire
   onSubmit() {
+    this.isSubmitted.set(true);
+
     if (this.signInForm.valid) {
       this._authService
         .register(this.getRegisterContext())
@@ -76,8 +78,6 @@ export class SigninComponent {
             // Handle the error here
           },
         });
-
-      this.isSubmitted.set(true);
     }
   }
 

@@ -34,6 +34,11 @@ export const webSidebarMenuItems: NavMenuItem[] = [
     icon: 'fa-box',
     subItems: [
       {
+        href: '/product-list',
+        title: 'Product List',
+        active: true,
+      },
+      {
         href: '/product-categories',
         title: 'Product Categories',
         active: false,

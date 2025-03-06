@@ -1,1 +1,1 @@
-export * from './bottomSheet.service';
+export * from './products/product.service';

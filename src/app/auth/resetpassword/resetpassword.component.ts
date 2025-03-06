@@ -55,6 +55,8 @@ export class ResetpasswordComponent {
 
   // Soumission du formulaire
   onSubmit() {
+    this.isSubmitted.set(true);
+
     if (this.resetPasswordForm.valid) {
       this._authService
         .resetPassword({
@@ -80,7 +82,6 @@ export class ResetpasswordComponent {
             // Handle the error here
           },
         });
-      this.isSubmitted.set(true);
     }
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Shell } from '@app/shell/services/shell.service';
 import { DashboardComponent } from '@pages/dashboard/dashboard.component';
 import { UserComponent } from './user/user/user.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
       path: 'profile',
       component: UserComponent,
+    },
+    {
+      path: 'product-list',
+      component: ProductListComponent,
     },
     {
       path: 'users',
