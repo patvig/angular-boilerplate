@@ -4,11 +4,8 @@
 <br />
 <div class="component-box">
   <ul *ngIf="!isLoading && !errorMessage">
-    <li *ngFor="let product of products">
-      <h3>{{ product.name }}</h3>
-      <p>Prix : {{ product.price }} €</p>
-      <p>{{ product.description }}</p>
-      <a [routerLink]="['/product', product.id]">Voir Détails</a>
+    <li *ngFor="let category of productCategories">
+      <h3>{{ category.name }}</h3>
     </li>
   </ul>
 </div>

@@ -41,7 +41,7 @@ export const webSidebarMenuItems: NavMenuItem[] = [
       {
         href: '/product-categories',
         title: 'Product Categories',
-        active: false,
+        active: true,
       },
       {
         href: '/product-types',

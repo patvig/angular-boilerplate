@@ -4,6 +4,7 @@ import { Shell } from '@app/shell/services/shell.service';
 import { DashboardComponent } from '@pages/dashboard/dashboard.component';
 import { UserComponent } from './user/user/user.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductCategoriesComponent } from './products/product-categories/product-categories.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
       path: 'product-list',
       component: ProductListComponent,
+    },
+    {
+      path: 'product-categories',
+      component: ProductCategoriesComponent,
     },
     {
       path: 'users',
