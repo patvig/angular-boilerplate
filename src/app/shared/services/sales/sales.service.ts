@@ -3,26 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
-export interface Product {
+export interface Sale {
   id: number;
-  name: string;
-  price: number;
-  description: string;
-  categoryName: string;
+  client: string;
+  prixProduitsHT: number;
+  prixProduitsTTC: number;
+  numeroVente: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class SalesService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl + '/products').pipe(
+  getProducts(): Observable<Sale[]> {
+    return this.http.get<Sale[]>(this.apiUrl + '/sales').pipe(
       catchError((error) => {
-        console.error('Erreur lors du chargement des produits', error);
+        console.error('Erreur lors du chargement des ventes', error);
         return throwError(() => new Error('Erreur API'));
       }),
     );

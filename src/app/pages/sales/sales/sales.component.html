@@ -1,0 +1,28 @@
+<div *ngIf="isLoading" class="loading">Chargement des ventes...</div>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<br />
+<div class="table">
+  <ul *ngIf="!isLoading && !errorMessage">
+    <li *ngFor="let sale of sales">
+      <h3>{{ sale.numeroVente }} - {{ sale.clientName }}</h3>
+      <p>Numero : {{ sale.numeroVente }} €</p>
+      <p>prixProduitsHT : {{ sale.prixProduitsHT }} €</p>
+      <p>prixProduitsTTC : {{ sale.prixProduitsTTC }} €</p>
+      <p>Produits :</p>
+      <table>
+        <thead>
+          <th>productName</th>
+          <th>quantity</th>
+          <th>prixHT</th>
+        </thead>
+        <tr *ngFor="let productSale of sale.productSales">
+          <td>{{ productSale.productName }}</td>
+          <td>{{ productSale.quantity }}</td>
+          <td>{{ productSale.prixHT }}</td>
+        </tr>
+      </table>
+      <a [routerLink]="['/sale', sale.id]">Voir Détails</a>
+    </li>
+  </ul>
+</div>

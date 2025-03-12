@@ -5,6 +5,7 @@ import { DashboardComponent } from '@pages/dashboard/dashboard.component';
 import { UserComponent } from './user/user/user.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductCategoriesComponent } from './products/product-categories/product-categories.component';
+import { SalesComponent } from './sales/sales/sales.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
       path: 'profile',
       component: UserComponent,
+    },
+    {
+      path: 'sales',
+      component: SalesComponent,
     },
     {
       path: 'product-list',
