@@ -3,26 +3,36 @@
 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 <br />
 <div class="table">
-  <ul *ngIf="!isLoading && !errorMessage">
-    <li *ngFor="let sale of sales">
-      <h3>{{ sale.numeroVente }} - {{ sale.clientName }}</h3>
+  <div *ngIf="!isLoading && !errorMessage">
+    <mat-card appearance="outlined" *ngFor="let sale of sales">
+      <mat-card-header>{{ sale.numeroVente }} - {{ sale.clientName }}</mat-card-header>
       <p>Numero : {{ sale.numeroVente }} €</p>
       <p>prixProduitsHT : {{ sale.prixProduitsHT }} €</p>
       <p>prixProduitsTTC : {{ sale.prixProduitsTTC }} €</p>
-      <p>Produits :</p>
-      <table>
-        <thead>
-          <th>productName</th>
-          <th>quantity</th>
-          <th>prixHT</th>
-        </thead>
-        <tr *ngFor="let productSale of sale.productSales">
-          <td>{{ productSale.productName }}</td>
-          <td>{{ productSale.quantity }}</td>
-          <td>{{ productSale.prixHT }}</td>
-        </tr>
-      </table>
-      <a [routerLink]="['/sale', sale.id]">Voir Détails</a>
-    </li>
-  </ul>
+
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Produits </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table>
+            <thead>
+              <th>productName</th>
+              <th>quantity</th>
+              <th>prixHT</th>
+            </thead>
+            <tr *ngFor="let productSale of sale.productSales">
+              <td>{{ productSale.productName }}</td>
+              <td>{{ productSale.quantity }}</td>
+              <td>{{ productSale.prixHT }}</td>
+            </tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-card-actions>
+        <button mat-button [routerLink]="['/sale', sale.id]">Voir Détails ></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

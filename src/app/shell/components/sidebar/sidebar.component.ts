@@ -5,7 +5,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs/operators';
 import { NavMode, ShellService } from '@app/shell/services/shell.service';
 import { webSidebarMenuItems } from '@core/constants';
-import { CredentialsService } from '@auth';
 import { NavMenuItem } from '@core/interfaces';
 
 @UntilDestroy({ checkProperties: true })
@@ -24,7 +23,6 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private readonly _router: Router,
-    private readonly _credentialsService: CredentialsService,
     public shellService: ShellService,
   ) {
     this.sidebarItems = webSidebarMenuItems;

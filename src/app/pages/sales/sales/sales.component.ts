@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Sale, SalesService } from '@app/shared/services/sales/sales.service';
 
 @Component({
   selector: 'app-sales',
   standalone: false,
-
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss',
 })
@@ -12,6 +11,7 @@ export class SalesComponent {
   sales: Sale[] = [];
   isLoading = true;
   errorMessage = '';
+  readonly panelOpenState = signal(false);
 
   constructor(private salesService: SalesService) {}
 
