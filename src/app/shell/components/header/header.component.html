@@ -1,23 +1,25 @@
-<nav>
-  <p class="title" translate>Bac a sable</p>
-
+<mat-toolbar>
   <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button aria-label="" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngIf="currentUser" [routerLink]="['/profile']">
         <mat-icon>account_circle</mat-icon>
-        <span>Profile</span>
+        <span translate>Profile</span>
       </button>
 
       <button mat-menu-item routerLink="/logout">
         <mat-icon>logout</mat-icon>
-        <span>Déconnection</span>
+        <span translate>Logout</span>
       </button>
     </mat-menu>
 
+    <span>My App</span>
+  </div>
+
+  <div>
     <app-language-selector></app-language-selector>
   </div>
-</nav>
+</mat-toolbar>

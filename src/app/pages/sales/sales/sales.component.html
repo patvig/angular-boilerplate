@@ -7,8 +7,9 @@
     <mat-card-header>{{ sale.numeroVente }} - {{ sale.clientName }}</mat-card-header>
     <mat-card-content>
       <p>Numero : {{ sale.numeroVente }} €</p>
-      <p>prixProduitsHT : {{ sale.prixProduitsHT }} €</p>
-      <p>prixProduitsTTC : {{ sale.prixProduitsTTC }} €</p>
+      <p>Prix HT : {{ sale.prixProduitsHT }} €</p>
+      <p>Prix TTC : {{ sale.prixProduitsTTC }} €</p>
+      <p>Date : {{ sale.dateVente | date }}</p>
 
       <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">

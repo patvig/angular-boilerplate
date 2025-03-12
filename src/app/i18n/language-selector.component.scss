@@ -9,6 +9,7 @@
   position: relative;
 
   .dropdown-toggle {
+    margin-right: 18px;
     cursor: pointer;
     user-select: none;
     color: var(--slate-gray);
@@ -31,7 +32,7 @@
 
   .selectable-list-popover {
     position: absolute;
-    right: 10px;
+    right: 0px;
     margin-top: 16px;
     z-index: 100;
   }
@@ -40,6 +41,17 @@
 // Show dropdown menu when `isDropdownOpen` is true
 .nav-item.open .selectable-list-popover {
   display: block;
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+  font-size: 14px;
+  padding: 0 12px;
+}
+.nav-item.open .selectable-list-popover li {
+  padding: 0 18px;
+}
+.nav-item.open .selectable-list-popover li:hover {
+  cursor: pointer;
+  background-color: beige;
 }
 
 .above {

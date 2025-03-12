@@ -15,9 +15,24 @@ import { LanguageSelectorComponent } from '@app/i18n';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, AuthModule, RouterModule, HumanizePipe, FormsModule, PagesModule, LanguageSelectorComponent, LoaderComponent, MatMenuModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    AuthModule,
+    RouterModule,
+    HumanizePipe,
+    FormsModule,
+    PagesModule,
+    LanguageSelectorComponent,
+    LoaderComponent,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+  ],
   declarations: [ShellComponent, HeaderComponent, SidebarComponent],
 })
 export class ShellModule {}
