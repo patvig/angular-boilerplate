@@ -12,6 +12,7 @@ export class SalesComponent {
   isLoading = true;
   errorMessage = '';
   readonly panelOpenState = signal(false);
+  displayedColumns: string[] = ['productName', 'quantity', 'prixHT'];
 
   constructor(private salesService: SalesService) {}
 

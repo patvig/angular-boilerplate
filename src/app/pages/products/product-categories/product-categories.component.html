@@ -2,10 +2,13 @@
 
 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 <br />
-<div class="component-box">
-  <ul *ngIf="!isLoading && !errorMessage">
-    <li *ngFor="let category of productCategories">
-      <h3>{{ category.name }}</h3>
-    </li>
-  </ul>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <mat-card appearance="outlined" *ngFor="let category of productCategories">
+    <mat-card-header>{{ category.name }}</mat-card-header>
+
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/category', category.id]">Voir Détails ></button>
+    </mat-card-actions>
+  </mat-card>
 </div>

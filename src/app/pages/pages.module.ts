@@ -12,9 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [UserComponent, ProductListComponent, ProductCategoriesComponent, SalesComponent],
-  imports: [CommonModule, PagesRoutingModule, MatMenuModule, MatButtonModule, MatIconModule, MatSlideToggleModule, MatCardModule, MatExpansionModule],
+  imports: [CommonModule, PagesRoutingModule, MatMenuModule, MatButtonModule, MatIconModule, MatSlideToggleModule, MatCardModule, MatExpansionModule, MatTableModule],
 })
 export class PagesModule {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ProductService, Product } from '../../../shared/services/products/product.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class ProductListComponent {
   products: Product[] = [];
   isLoading = true;
   errorMessage = '';
+  readonly panelOpenState = signal(false);
 
   constructor(private productService: ProductService) {}
 
@@ -23,6 +24,7 @@ export class ProductListComponent {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data['member'];
+        console.log('this.products', this.products);
         this.isLoading = false;
       },
       error: (err) => {
