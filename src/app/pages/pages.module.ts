@@ -13,9 +13,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [UserComponent, ProductListComponent, ProductCategoriesComponent, SalesComponent],
-  imports: [CommonModule, PagesRoutingModule, MatMenuModule, MatButtonModule, MatIconModule, MatSlideToggleModule, MatCardModule, MatExpansionModule, MatTableModule],
+  imports: [CommonModule, PagesRoutingModule, MatMenuModule, MatButtonModule, MatIconModule, MatSlideToggleModule, MatCardModule, MatExpansionModule, MatTableModule, HighchartsChartModule],
 })
 export class PagesModule {}
