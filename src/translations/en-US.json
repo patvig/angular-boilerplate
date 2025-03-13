@@ -4,6 +4,8 @@
   "Hello World": "Hello World",
   "Home": "Home",
   "Login": "Login",
+  "Logout": "Logout",
+  "Profile": "Profile",
   "Username": "Username",
   "Password": "Password",
   "test Angular 19": "test Angular 19",
